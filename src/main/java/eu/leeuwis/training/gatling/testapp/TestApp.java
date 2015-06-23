@@ -2,11 +2,11 @@ package eu.leeuwis.training.gatling.testapp;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.*;
-import org.springframework.boot.autoconfigure.*;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.*;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -37,6 +37,7 @@ public class TestApp {
     }
 
     @RequestMapping(value="/my", method=RequestMethod.GET)
+    @ResponseBody
     ResponseEntity<String> my(HttpSession session){
         Object loggedin = session.getAttribute("loggedin");
         if (loggedin != null && loggedin instanceof Boolean && (Boolean) loggedin){
@@ -45,6 +46,17 @@ public class TestApp {
             return new ResponseEntity<String>("Login first at /login. " +
                     "POST username=myUsernam and password=myPassword as JSON", HttpStatus.FORBIDDEN);
         }
+    }
+
+    @RequestMapping(value="/slow", method=RequestMethod.GET)
+    @ResponseBody
+    String slow() {
+        try {
+            Thread.sleep(2000l);
+        } catch (InterruptedException e) {
+            LOG.warn("sleep didn't work..");
+        }
+        return "Wow that wasn't fast..";
     }
 
     public static void main(String[] args) throws Exception {
