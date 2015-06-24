@@ -44,7 +44,7 @@ public class TestApp {
             return new ResponseEntity<String>("{\"message\": \"This is my secret: I have logged in!\"}", HttpStatus.OK);
         } else {
             return new ResponseEntity<String>("{\"message\": \"Login first at /login. " +
-                    "POST username=myUsernam and password=myPassword as JSON\"}", HttpStatus.FORBIDDEN);
+                    "POST username=myUsername and password=myPassword as JSON\"}", HttpStatus.FORBIDDEN);
         }
     }
 
