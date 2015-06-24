@@ -1,0 +1,19 @@
+<div class="login">
+    <h1>Login Form</h1>
+    <form>
+        <div>
+            <label for="usr">Username</label>
+            <input type="text" name="username" id="usr" ng-model="credentials.username"/>
+            <span>myUsername</span>
+        </div>
+        <div>
+            <label for="pwd">Password</label>
+            <input type="password" name="password" id="pwd" ng-model="credentials.password"/>
+            <span>myPassword</span>
+        </div>
+        <div>
+            <input type="submit" ng-click="mySubmit()"/>
+        </div>
+    </form>
+    <p>status: {{status}}</p>
+</div>
