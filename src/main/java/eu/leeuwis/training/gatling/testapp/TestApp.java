@@ -21,7 +21,7 @@ public class TestApp {
     @ResponseBody
     String echo(@PathVariable String message){
         LOG.info("echo: {}", message);
-        return message;
+        return "{\"echo\": \""+message+"\"}";
     }
 
     @RequestMapping(value="/login", method=RequestMethod.POST)
