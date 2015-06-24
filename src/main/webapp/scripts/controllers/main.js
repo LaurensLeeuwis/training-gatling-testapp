@@ -5,7 +5,7 @@ angular.module('testApp')
         $scope.hi = 'Hi there!'.toUpperCase();
         $scope.yolo = 'echo';
 
-        $http.get('/echo/echooo')
+        $http.get('/echo?message=echooo')
             .success(function(data) {
                 console.log(data);
                 $scope.yolo = data.echo;

@@ -17,9 +17,9 @@ public class TestApp {
 
     private static final Logger LOG = LoggerFactory.getLogger(TestApp.class);
 
-    @RequestMapping(value="/echo/{message}", method=RequestMethod.GET)
+    @RequestMapping(value="/echo", method=RequestMethod.GET)
     @ResponseBody
-    String echo(@PathVariable String message){
+    String echo(@RequestParam String message){
         LOG.info("echo: {}", message);
         return "{\"echo\": \""+message+"\"}";
     }
