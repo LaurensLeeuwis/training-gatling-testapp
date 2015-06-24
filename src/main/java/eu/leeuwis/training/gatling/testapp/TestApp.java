@@ -29,7 +29,7 @@ public class TestApp {
     ResponseEntity<String> login(@RequestBody Credentials credentials, HttpSession session) {
         if (credentials.isValid()){
             session.setAttribute("loggedin", true);
-            return new ResponseEntity<String>("login succeeded", HttpStatus.OK);
+            return new ResponseEntity<String>("{\"status\": \"login succeeded\"}", HttpStatus.OK);
         } else {
             session.invalidate();
             return new ResponseEntity<String>(HttpStatus.UNAUTHORIZED);
@@ -41,10 +41,10 @@ public class TestApp {
     ResponseEntity<String> my(HttpSession session){
         Object loggedin = session.getAttribute("loggedin");
         if (loggedin != null && loggedin instanceof Boolean && (Boolean) loggedin){
-            return new ResponseEntity<String>("This is my secret: I have logged in!", HttpStatus.OK);
+            return new ResponseEntity<String>("{\"message\": \"This is my secret: I have logged in!\"}", HttpStatus.OK);
         } else {
-            return new ResponseEntity<String>("Login first at /login. " +
-                    "POST username=myUsernam and password=myPassword as JSON", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<String>("{\"message\": \"Login first at /login. " +
+                    "POST username=myUsernam and password=myPassword as JSON\"}", HttpStatus.FORBIDDEN);
         }
     }
 
@@ -56,7 +56,7 @@ public class TestApp {
         } catch (InterruptedException e) {
             LOG.warn("sleep didn't work..");
         }
-        return "Wow that wasn't fast..";
+        return "{\"message\": \"Wow that wasn't fast..\"}";
     }
 
     public static void main(String[] args) throws Exception {
